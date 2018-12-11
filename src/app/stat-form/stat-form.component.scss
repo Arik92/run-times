@@ -1,0 +1,36 @@
+.form-container {
+    background-color: #7DC383;
+    position: absolute;
+    top: 15%;
+    height: 80%;
+    width: 60%;
+    left: 20%;
+    .radio-container {
+        margin: 20px  0px 0px 20px;
+        .radio-header {
+            margin-bottom: 10px;
+            user-select:none;
+        }    
+        .radio-btn {
+            margin-right: 10px;
+        }
+    }
+    // .time-input-label {
+        
+    // }
+    .time-input-field {
+        margin-right:10px;
+    }
+    .results {
+        margin: 20px  0px 0px 20px;
+        // .results-header {
+        // }
+        .results-display-container {
+            display:flex;
+            flex-flow: row wrap;
+
+        }
+    }
+    
+}
+

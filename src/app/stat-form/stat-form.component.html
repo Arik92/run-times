@@ -1,0 +1,33 @@
+<div class="form-container">
+  <div class="radio-container">
+  <div class="radio-header">
+    Choose a running mode
+  </div>
+  <mat-radio-group [(ngModel)]="selectedMode">
+    <mat-radio-button class="radio-btn" [checked]="mode==='5k'" (change)="runningModeChanged($event.value)" [name]="run-mode"
+     *ngFor="let mode of runModes" [value]="mode" >
+      {{mode}}
+    </mat-radio-button>
+  </mat-radio-group>
+  <br />
+  <div class="time-input-label">Enter your run time:</div>
+  <mat-form-field class="time-input-field">
+      <input (change)="calcGoals()" matInput type="number"  min="0" placeholder="Hours" value="0" [(ngModel)]="timeHours">
+  </mat-form-field>
+  <mat-form-field class="time-input-field">
+      <input (change)="calcGoals()" matInput type="number"  min="0" placeholder="Minutes" [(ngModel)]="timeMinutes">
+  </mat-form-field>
+  <mat-form-field class="time-input-field">
+      <input (change)="calcGoals()" matInput type="number" min="0" placeholder="Seconds" value="0" [(ngModel)]="timeSeconds">
+  </mat-form-field>
+</div>
+<div class="results">
+  <div class="results-header">Based on this time, your running goals for the following times are: </div>
+  <div *ngFor="let result of goalResults" class="results-display-container">
+    <div  class="result">{{result.goalLength}} : {{result.goalTime}}</div>
+  </div>
+</div>
+<div class="export-container"> 
+  <button (click)="exportResults()">Export to csv</button>
+</div>
+</div>

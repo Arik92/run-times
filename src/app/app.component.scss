@@ -1,0 +1,22 @@
+.app-container {
+    width:100vw;
+    height:100vh;
+    //overflow: none;
+}
+.header-container {
+    color: #6A9C78;
+    background-color: #FFF1BC;
+    width: 100%;
+    height: 20%;
+    position:absolute;
+    top:0;
+    left:0;
+
+}
+.body-container {
+    background-color:#446E5C;
+    position:absolute;
+    top: 20%;
+    width:100%;
+    height:80%;
+}
