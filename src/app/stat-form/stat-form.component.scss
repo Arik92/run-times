@@ -5,8 +5,13 @@
     height: 80%;
     width: 60%;
     left: 20%;
+    .slide-defs {
+        height: 100%;
+    }
+    .carousel-item div {
+      margin: 20px  0 0 20px;
+    }
     .radio-container {
-        margin: 20px  0px 0px 20px;
         .radio-header {
             margin-bottom: 10px;
             user-select:none;
@@ -21,14 +26,16 @@
     .time-input-field {
         margin-right:10px;
     }
-    .results {
-        margin: 20px  0px 0px 20px;
-        // .results-header {
-        // }
-        .results-display-container {
-            display:flex;
-            flex-flow: row wrap;
+    .results {        
+        height: 400px;
+        display: flex;
+        flex-flow: column wrap;
+        width: 92%;      
+        .export-container {
+            margin: 40px  0 0 40px;
 
+            // margin-top: 40px;
+            // margin-left:40px;
         }
     }
     

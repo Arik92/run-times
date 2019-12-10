@@ -1,11 +1,6 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-// Run the app by serving the static files
-// in the dist directory
-// ...
-// For all GET requests, send back index.html
-// so that PathLocationStrategy can be used
 
 const forceSSL = function() {
     return function (req, res, next) {
@@ -17,16 +12,15 @@ const forceSSL = function() {
       next();
     }
   }
-  // Instruct the app
-  // to use the forceSSL
-  // middleware
+  
+  // forceSSL middleware
   // app.use(forceSSL());
 app.use(express.static(__dirname + '/dist/runTimez'));
 // app.use(express.static(__dirname + '/src'));
+console.log('testing env? ', process.env.NODE_ENV);
 app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname + '/dist/runTimez/index.html'));
-    // res.sendFile(path.join(__dirname + '/src/index.html'));
+  const appPath = __dirname + process.env.NODE_ENV === 'dev' ? '/src/index.html' : '/dist/runTimez/index.html';
+    res.sendFile(path.join(appPath));
   });
-// Start the app by listening on the default
-// Heroku port
+// Start the app by listening on the default or Heroku port
 app.listen(process.env.PORT || 8080);

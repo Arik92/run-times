@@ -15,6 +15,9 @@ export class StatFormComponent implements OnInit {
   timeHours: number=0;
   timeMinutes: number=0;
   timeSeconds: number=0;
+  nextFlag: boolean = true;
+  prevFlag: boolean = false;
+  
 
   goalResults  = [
     {
@@ -52,14 +55,34 @@ export class StatFormComponent implements OnInit {
     {
       'goalLength': '2k',
       'goalTime': '00:00:00'
-    },
-  ]
+    }
+  ];
 
   constructor(private papa: Papa) { }
 
   ngOnInit() {    
   }
-    
+  // slider controls
+
+  showNext():boolean {
+    return (this.getGoalMilliseconds()!== 0) && this.nextFlag;
+  }
+
+  showPrev():boolean {
+    return this.prevFlag;
+  }
+
+  onNext() {
+    this.nextFlag = false;
+    this.prevFlag = true;
+  }
+
+  onPrev() {
+    this.nextFlag = true;
+    this.prevFlag = false;
+  }
+
+  // slider controls     
 
   runningModeChanged(val) {
     this.runModeVal = val === '5k' ? 5 : 10;
@@ -117,10 +140,10 @@ export class StatFormComponent implements OnInit {
     console.log('csv is ', csv);
     var blob = new Blob([csv]);
     const fileName = moment().format('LLL') + ".csv";
-if (window.navigator.msSaveOrOpenBlob)  // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.aspx
+if (window.navigator.msSaveOrOpenBlob) {  
+    // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.asp    
     window.navigator.msSaveBlob(blob, fileName);
-else
-{
+    } else {
     var a = window.document.createElement("a");
     a.href = window.URL.createObjectURL(blob);
     a.download = fileName;
