@@ -1,5 +1,7 @@
 const path = require('path');
 const express = require('express');
+let compression = require('compression');
+
 const app = express();
 
 // const determineEnv = () => {
@@ -22,6 +24,7 @@ const forceSSL = function() {
   
   // forceSSL middleware
   // app.use(forceSSL());
+  app.use(compression());
 app.use(express.static(__dirname + '/dist/runTimez'));
 // app.use(express.static(__dirname + '/src'));
 console.log('testing env? ', process.env.NODE_ENV);
