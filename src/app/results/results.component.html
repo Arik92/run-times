@@ -1,0 +1,12 @@
+<div class="result-wrapper compact-container">
+  <div class="result-header">Based on this time, your running goals for the following times are: </div>
+  <div class="results">
+    <div *ngFor="let result of goalResults" class="results-display-container">
+      <div class="result">{{result.goalLength}} : {{result.goalTime}}</div>
+      <br />
+    </div>
+    <div class="export-container">
+      <button mat-raised-button color="primary" (click)="exportResults()">Export to csv</button>
+    </div>
+  </div>
+</div>

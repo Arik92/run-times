@@ -1,43 +1,51 @@
-.form-container {
-    background-color: #7DC383;
-    position: absolute;
-    top: 15%;
-    height: 80%;
-    width: 60%;
-    left: 20%;
-    .slide-defs {
-        height: 100%;
-    }
-    .carousel-item div {
-      margin: 20px  0 0 20px;
-    }
-    .radio-container {
-        .radio-header {
-            margin-bottom: 10px;
-            user-select:none;
+.form-container {    
+    display: flex;
+    flex-direction: column;
+   
+    .radio-section {
+        // position:absolute;
+            width:100%;
+            height: 25%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+        .radio-header, .radio-btns {
+            // position: absolute;
+            width: 100%;
+            height: 50%;                              
+            display: flex;            
+            align-items: center;
+            flex-direction: row;
+            justify-content: center;
         }    
-        .radio-btn {
-            margin-right: 10px;
-        }
-    }
-    // .time-input-label {
-        
-    // }
-    .time-input-field {
-        margin-right:10px;
-    }
-    .results {        
-        height: 400px;
-        display: flex;
-        flex-flow: column wrap;
-        width: 92%;      
-        .export-container {
-            margin: 40px  0 0 40px;
-
-            // margin-top: 40px;
-            // margin-left:40px;
+        .radio-header {
+            top: 0;
+        }        
+        .radio-btns {
+            top: 50%;
+            .radio-btn {
+                margin-right: 15px;
+            }
         }
     }
     
+    .form-wrapper {
+        // position: absolute;
+        width: 100%;
+        height:75%;
+        // top: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;        
+        
+        .time-input-field {
+            margin-right:10px;
+        }
+    }    
+    .radio-header, .time-input-label, .radio-btns {
+        user-select: none;  
+    }
 }
 
