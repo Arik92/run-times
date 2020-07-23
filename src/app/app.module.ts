@@ -10,13 +10,19 @@ import {MatInputModule} from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { PapaParseModule } from 'ngx-papaparse';
 import { ResultsComponent } from './results/results.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     StatFormComponent,
-    ResultsComponent
+    ResultsComponent,
+    LoginComponent,
+    SignupComponent,
+    NotFoundComponent
   ],
   imports: [
     FormsModule,
