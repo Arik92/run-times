@@ -3,6 +3,7 @@ const router = express.Router();
 let passport = require('passport');
 let fbStrategy = require('passport-facebook').Strategy; // there might be more than one strategy
 let user = require('../models/user');
+const { nextTick } = require('process');
 
 // Configure the Facebook strategy for use by Passport.
 // OAuth 2.0-based strategies require a `verify` function which receives the
@@ -23,6 +24,7 @@ passport.use(new fbStrategy({
         console.error('error finding fb user on DB', err);
       } else {
         if (!res) {
+          console.log('creating new user ');
           // no user found. create a new one from scratch
           let newUser = new user({});          
           newUser.facebook_id = profile.id;
@@ -37,6 +39,7 @@ passport.use(new fbStrategy({
             }
           })
         } else {
+          console.log('useralready in the system');
           // user exists, returning it
           return cb(null, res);
         }
@@ -62,12 +65,17 @@ passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
 // FB routes
+router.get('/hello', (req, res, next) => {
+  console.log('hello handler');
+  // nextTick();
+  next();
+})
 router.get('/login/facebook', passport.authenticate('facebook'), (req, res) =>{
 }, (err) =>{
   console.log('err? ', err)
 });
 // fb-strategy required path
-router.get('/fbreturn', passport.authenticate('facebook', { failureRedirect: '/login', successRedirect: '/' })); 
+router.get('/fbreturn', passport.authenticate('facebook', { failureRedirect: '/#/login', successRedirect: '/#/stats' })); 
 router.get('/fbuser', (req, res) => {
     console.log('/fbuser route, user is ', req.user);
   res.send(req.user);

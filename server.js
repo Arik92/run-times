@@ -54,7 +54,7 @@ app.use(expressSession({ secret: 'Gotta go fast!',
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use('/users', userRoutes);
+app.use('/users', userRoutes);
 // app.use(express.static(__dirname + '/src'));
 // app.use(express.static(__dirname + '/src/'+'index.html'));
 
