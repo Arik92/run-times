@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   }
   facebookLogin() {
     console.log('triggered fb login');
-    this.http.get('127.0.0.1/users/login/facebook').subscribe(res => {
+    this.http.get('/users/login/facebook').subscribe(res => {
       console.log('got something back! ', res);
     });
 

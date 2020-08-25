@@ -63,11 +63,10 @@ console.log('static root is ',staticRoot);
 app.use(express.static(staticRoot));
 app.use(express.static(__dirname + '/src'));
 
-app.get('/*', function(req, res) {
-  console.log('triggered /* route. dirName is ', __dirname);
-    // res.sendFile(path.join(staticRoot + 'index.html'));
-    res.sendFile('src/index.html', {root: path.dirname(__dirname+'/run-times')})
-  });
+// app.get('/*', function(req, res) {
+//   console.log('triggered /* route. dirName is ', __dirname);
+//     // res.sendFile('src/index.html', {root: path.dirname(__dirname+'/run-times/')})
+//   });
 // Start the app by listening on the default or Heroku port
 
 // app.use(express.static(staticRoot + 'index.html'));

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-stat-form',
@@ -17,10 +19,17 @@ export class StatFormComponent implements OnInit {
   minuteConst: number = 60000; // 60 * 1000
   secondConst: number = 1000; // seconds to milliseconds
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit() {    
+    this.getUserDetails();
   }  
+
+  getUserDetails = async () => {
+    this.http.get('/users/details').subscribe(result => {
+      console.log('user details result? ', result);
+    });
+  }
 
   canCalc():boolean {
     return !(this.getGoalMilliseconds() === 0);

@@ -1,9 +1,32 @@
 const express = require('express');
 const router = express.Router();
 let passport = require('passport');
+let localStrategy = require('passport-local').Strategy;
+
 let fbStrategy = require('passport-facebook').Strategy; // there might be more than one strategy
 let user = require('../models/user');
-const { nextTick } = require('process');
+const User = require('../models/user');
+
+// configure localStrategy
+
+passport.use(new localStrategy(
+  function(username, password, done) {
+    console.log('local strategy');
+    console.log('username is ', username);
+    console.log('password is ', password);
+
+    User.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
 
 // Configure the Facebook strategy for use by Passport.
 // OAuth 2.0-based strategies require a `verify` function which receives the
@@ -11,7 +34,6 @@ const { nextTick } = require('process');
 // behalf, along with the user's profile.  The function must invoke `cb`
 // with a user object, which will be set at `req.user` in route handlers after
 // authentication.
-
 passport.use(new fbStrategy({
     clientID: process.env['FACEBOOK_CLIENT_ID'],
     clientSecret: process.env['FACEBOOK_CLIENT_SECRET'],
@@ -64,20 +86,39 @@ passport.serializeUser(function(user, cb) {
 passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
-// FB routes
-router.get('/hello', (req, res, next) => {
-  console.log('hello handler');
-  // nextTick();
-  next();
+
+// local routes
+router.post('/signup', async (req, res) => {
+  console.log('body is ', req.body);
+  console.log('got into signup');
+  const username = req.body.username;
+  const foundUser = await user.findOne({name: username});
+  if (foundUser) {
+    console.log('found user? ', foundUser);
+    res.send({"message":"a user with this name already exists!"});
+  } else {
+    const newUser = new user({});
+    newUser.name = username;
+    newUser.password = req.body.password;
+    newUser.runData = [];
+    await newUser.save();
+    res.send({"message":"user successfully saved"});
+  }
 })
+router.get('/login/local', passport.authenticate('local', { failureRedirect: '/#/login', successRedirect: '/#/stats',
+failureFlash: true }));
+// local
+
+// FB routes
 router.get('/login/facebook', passport.authenticate('facebook'), (req, res) =>{
 }, (err) =>{
   console.log('err? ', err)
 });
 // fb-strategy required path
-router.get('/fbreturn', passport.authenticate('facebook', { failureRedirect: '/#/login', successRedirect: '/#/stats' })); 
-router.get('/fbuser', (req, res) => {
-    console.log('/fbuser route, user is ', req.user);
+router.get('/fbreturn', passport.authenticate('facebook', { failureRedirect: '/#/login', successRedirect: '/#/stats',
+failureFlash: true })); 
+router.get('/user', (req, res) => {
+    console.log('user is ', req.user);
   res.send(req.user);
 });
 // FB routes
@@ -86,4 +127,9 @@ router.get('/logout', (req, res) => {
     req.logOut();
     res.redirect('/');
   });
+  router.get('/details', (req, res) => {    
+    res.send(req.user);
+  });
+
+  
 module.exports = router;

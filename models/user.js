@@ -3,8 +3,9 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let userSchema = new Schema({
-    facebook_id: { type: String, unique: true }, // personal number. there might be issues with this
+    facebook_id: { type: String }, // personal number. there might be issues with this , unique: true
     name: String,
+    password: String,
     runData: [{
         runType: { 
             type: String,
