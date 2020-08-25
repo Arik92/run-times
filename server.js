@@ -18,18 +18,18 @@ const staticRoot = __dirname + '/src/';
 let mongo_connection_string_local = "mongodb://localhost/runTimez";
 let mongo_connection_string = mongo_connection_string_local;
 mongoose.Promise = global.Promise;
-mongoose.connect(mongo_connection_string, {
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useNewUrlParser: true // anti depracation configs
-},
-  function (err, db) {
-    if (err) {
-      console.error("Error connecting to mongo", err);
-    } else {
-      console.log("Connected to mongo");
-    }
-  });
+// mongoose.connect(mongo_connection_string, {
+//   useUnifiedTopology: true,
+//   useCreateIndex: true,
+//   useNewUrlParser: true // anti depracation configs
+// },
+//   function (err, db) {
+//     if (err) {
+//       console.error("Error connecting to mongo", err);
+//     } else {
+//       console.log("Connected to mongo");
+//     }
+//   });
   // MONGO CONNECT
 
 
