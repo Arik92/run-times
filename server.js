@@ -2,10 +2,10 @@ require('dotenv').config();
 const path = require('path');
 const fs = require('fs');
 const express = require('express');
-const expressSession = require('express-session');
-const MongoStore = require('connect-mongo')(expressSession);
+// const expressSession = require('express-session');
+// const MongoStore = require('connect-mongo')(expressSession);
 const compression = require('compression');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
@@ -17,7 +17,7 @@ const staticRoot = __dirname + '/src/';
 // var mongo_connection_string = typeof (mongo_connection_string_prod) !== "undefined" ? mongo_connection_string_prod : mongo_connection_string_local;
 let mongo_connection_string_local = "mongodb://localhost/runTimez";
 let mongo_connection_string = mongo_connection_string_local;
-mongoose.Promise = global.Promise;
+// mongoose.Promise = global.Promise;
 // mongoose.connect(mongo_connection_string, {
 //   useUnifiedTopology: true,
 //   useCreateIndex: true,
@@ -48,9 +48,9 @@ const app = express();
 app.use(compression());
 app.use(express.static(__dirname + '/dist/runTimez'));
 app.use(bodyParser.json());
-app.use(expressSession({ secret: 'Gotta go fast!',
- resave: true, saveUninitialized: true,
- store: new MongoStore({url: mongo_connection_string_local, secret: 'run mongo run'}) }));
+// app.use(expressSession({ secret: 'Gotta go fast!',
+//  resave: true, saveUninitialized: true,
+//  store: new MongoStore({url: mongo_connection_string_local, secret: 'run mongo run'}) }));
 // app.use(passport.initialize()); //uncomment for auth
 // app.use(passport.session());
 
@@ -59,7 +59,6 @@ app.use(expressSession({ secret: 'Gotta go fast!',
 // app.use(express.static(__dirname + '/src/'+'index.html'));
 
 // console.log('testing env? ', process.env.NODE_ENV);
-console.log('static root is ',staticRoot);
 app.use(express.static(staticRoot));
 app.use(express.static(__dirname + '/src'));
 
