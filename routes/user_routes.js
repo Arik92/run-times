@@ -10,10 +10,7 @@ const User = require('../models/user');
 // configure localStrategy
 
 passport.use(new localStrategy(
-  function(username, password, done) {
-    console.log('local strategy');
-    console.log('username is ', username);
-    console.log('password is ', password);
+  function(username, password, done) {    
 
     User.findOne({ username: username }, function(err, user) {
       if (err) { return done(err); }
@@ -88,9 +85,7 @@ passport.deserializeUser(function(obj, cb) {
 });
 
 // local routes
-router.post('/signup', async (req, res) => {
-  console.log('body is ', req.body);
-  console.log('got into signup');
+router.post('/signup', async (req, res) => {  
   const username = req.body.username;
   const foundUser = await user.findOne({name: username});
   if (foundUser) {

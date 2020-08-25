@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
-const userRoutes = require('./routes/user_routes');
+// const userRoutes = require('./routes/user_routes');
 const staticRoot = __dirname + '/src/';
 // MONGO CONNECT
 // var mongo_config = JSON.parse(process.env.APP_CONFIG);
@@ -51,8 +51,8 @@ app.use(bodyParser.json());
 app.use(expressSession({ secret: 'Gotta go fast!',
  resave: true, saveUninitialized: true,
  store: new MongoStore({url: mongo_connection_string_local, secret: 'run mongo run'}) }));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize()); //uncomment for auth
+// app.use(passport.session());
 
 // app.use('/users', userRoutes);
 // app.use(express.static(__dirname + '/src'));
