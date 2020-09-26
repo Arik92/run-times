@@ -14,6 +14,9 @@ import { ResultsComponent } from './results/results.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -23,7 +26,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ResultsComponent,
     LoginComponent,
     SignupComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DashboardComponent,
+    SidebarComponent,
+    HomeComponent
   ],
   imports: [
     FormsModule,

@@ -6,10 +6,16 @@ import { ResultsComponent } from './results/results.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '',   redirectTo: '/stats', pathMatch: 'full' },
-  { path: 'stats', component: StatFormComponent  },
+  { path: '',   redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent, children: [
+    { path: 'stats', component: StatFormComponent },
+    { path: 'home', component: HomeComponent },
+  ]  },  
+  { path: 'stats-freeform', component: StatFormComponent  },
   { path: 'results', component: ResultsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
