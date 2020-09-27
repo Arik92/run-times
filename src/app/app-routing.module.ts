@@ -8,12 +8,14 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
+import { GraphsComponent } from './graphs/graphs.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent, children: [
     { path: 'stats', component: StatFormComponent },
     { path: 'home', component: HomeComponent },
+    { path: 'graphs', component: GraphsComponent }
   ]  },  
   { path: 'stats-freeform', component: StatFormComponent  },
   { path: 'results', component: ResultsComponent },

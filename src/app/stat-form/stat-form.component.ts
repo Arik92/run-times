@@ -26,9 +26,9 @@ export class StatFormComponent implements OnInit {
   }  
 
   getUserDetails = async () => {
-    this.http.get('/users/details').subscribe(result => {
-      console.log('user details result? ', result);
-    });
+    // this.http.get('/users/details').subscribe(result => {
+    //   console.log('user details result? ', result);
+    // });
   }
 
   canCalc():boolean {
